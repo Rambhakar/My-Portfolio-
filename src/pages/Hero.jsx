@@ -72,13 +72,13 @@ const Hero = () => {
                   technologies.
                </p>
 
-               {/* SOCIAL ICONS — PURE HTML LINKS */}
+               {/* SOCIAL ICONS — FOOTER STYLE SAFE */}
                <div className="flex flex-wrap gap-4">
 
                   <a
                      href="https://github.com/Rambhakar/"
-                     // target="_blank"
-                     // rel="noopener noreferrer"
+                     target="_blank"
+                     rel="noopener noreferrer"
                      className="icon-btn text-gray-300"
                   >
                      <FaGithub />
@@ -86,8 +86,8 @@ const Hero = () => {
 
                   <a
                      href="https://www.linkedin.com/in/ramniwas-bhakar-6956a7378/"
-                     // target="_blank"
-                     // rel="noopener noreferrer"
+                     target="_blank"
+                     rel="noopener noreferrer"
                      className="icon-btn text-[#0A66C2]"
                   >
                      <FaLinkedinIn />
@@ -95,8 +95,8 @@ const Hero = () => {
 
                   <a
                      href="https://www.instagram.com/rambhakar_09/"
-                     // target="_blank"
-                     // rel="noopener noreferrer"
+                     target="_blank"
+                     rel="noopener noreferrer"
                      className="icon-btn text-pink-500"
                   >
                      <FaInstagram />
@@ -104,8 +104,8 @@ const Hero = () => {
 
                   <a
                      href="https://www.facebook.com/profile.php?id=100066672422973"
-                     // target="_blank"
-                     // rel="noopener noreferrer"
+                     target="_blank"
+                     rel="noopener noreferrer"
                      className="icon-btn text-[#1877F2]"
                   >
                      <FaFacebookF />
@@ -113,8 +113,8 @@ const Hero = () => {
 
                   <a
                      href="https://t.me/rambhakar_09"
-                     // target="_blank"
-                     // rel="noopener noreferrer"
+                     target="_blank"
+                     rel="noopener noreferrer"
                      className="icon-btn text-[#229ED9]"
                   >
                      <FaTelegramPlane />
@@ -158,8 +158,8 @@ const Hero = () => {
             padding: 1rem;
             border-radius: 9999px;
             border: 1px solid #374151;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             font-size: 18px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
           }
           .icon-btn:hover {
             transform: scale(1.15);

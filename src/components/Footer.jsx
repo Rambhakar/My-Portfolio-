@@ -4,10 +4,13 @@ import {
    FaGithub,
    FaLinkedin,
    FaInstagram,
+   FaWhatsapp,
+   FaTelegramPlane,
+   FaEnvelope,
    FaArrowUp,
 } from "react-icons/fa";
 
-/* ---------------- Cursor Follower (Smooth) ---------------- */
+/* ---------------- Cursor Follower ---------------- */
 const CursorFollower = () => {
    const cursorRef = useRef(null);
 
@@ -37,71 +40,49 @@ const CursorFollower = () => {
 };
 
 const Footer = () => {
-   /* Scroll Progress */
    const { scrollYProgress } = useScroll();
+
    const progress = useSpring(scrollYProgress, {
       stiffness: 80,
       damping: 25,
    });
 
-   /* Scroll-based glow + lift */
-   const glowOpacity = useTransform(
-      scrollYProgress,
-      [0.6, 1],
-      [0.1, 0.35]
-   );
-
-   const footerY = useTransform(
-      scrollYProgress,
-      [0.7, 1],
-      [60, 0]
-   );
+   const glowOpacity = useTransform(scrollYProgress, [0.6, 1], [0.1, 0.35]);
+   const footerY = useTransform(scrollYProgress, [0.7, 1], [60, 0]);
 
    return (
       <>
          <CursorFollower />
 
-         {/* Scroll Progress Bar */}
+         {/* Scroll Progress */}
          <motion.div
             style={{ scaleX: progress }}
             className="fixed top-0 left-0 right-0 h-[3px]
         origin-left bg-blue-500 z-[999]"
          />
 
-         <footer className="relative w-full overflow-hidden bg-black text-gray-400 pt-32 pb-14">
+         <footer className="relative bg-black text-gray-400 pt-32 pb-14 overflow-hidden">
 
-            {/* Scroll Reactive Glow */}
+            {/* Glow */}
             <motion.div
                style={{ opacity: glowOpacity }}
                className="absolute inset-0 bg-blue-500/10 blur-3xl"
             />
 
-            {/* Wave Top */}
-            <div className="absolute top-0 left-0 w-full">
-               <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-                  <path
-                     fill="#000"
-                     d="M0,40 C120,80 240,0 360,20 480,40 600,120 720,100 840,80 960,0 1080,10 1200,20 1320,60 1440,40 L1440,0 L0,0 Z"
-                  />
-               </svg>
-            </div>
-
-            {/* Content */}
             <motion.div
                style={{ y: footerY }}
-               className="relative z-10 w-full px-6 md:px-16"
+               className="relative z-10 px-6 md:px-16"
             >
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
 
                   {/* Brand */}
                   <div>
                      <h2 className="text-3xl font-bold text-blue-400 neon">
                         Ramniwas<span className="text-white">.dev</span>
                      </h2>
-
                      <p className="mt-4 text-sm max-w-md">
-                        Full Stack Developer building smooth, scalable
-                        and user-focused web experiences.
+                        Full Stack Developer building smooth, scalable and
+                        user-focused web experiences.
                      </p>
                   </div>
 
@@ -110,12 +91,10 @@ const Footer = () => {
                      <h3 className="text-white font-semibold tracking-widest">
                         QUICK LINKS
                      </h3>
-
                      {["Home", "About", "Projects", "Contact"].map((item) => (
                         <motion.a
                            key={item}
                            whileHover={{ x: 10 }}
-                           transition={{ type: "spring", stiffness: 200 }}
                            href={`#${item.toLowerCase()}`}
                            className="hover:text-blue-400"
                         >
@@ -130,50 +109,87 @@ const Footer = () => {
                         CONNECT
                      </h3>
 
-                     <div className="flex gap-6 text-2xl">
-                        {[FaGithub, FaLinkedin, FaInstagram].map((Icon, i) => (
-                           <motion.a
-                              key={i}
-                              whileHover={{ scale: 1.25 }}
-                              whileTap={{ scale: 0.95 }}
-                              href="#"
-                              className="hover:text-blue-400 neon-hover"
-                           >
-                              <Icon />
-                           </motion.a>
-                        ))}
+                     <div className="flex flex-wrap gap-6 text-2xl">
+
+                        <motion.a
+                           href="https://github.com/Rambhakar/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           whileHover={{ scale: 1.25 }}
+                           className="hover:text-white"
+                        >
+                           <FaGithub />
+                        </motion.a>
+
+                        <motion.a
+                           href="https://www.linkedin.com/in/ramniwas-bhakar-6956a7378/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           whileHover={{ scale: 1.25 }}
+                           className="hover:text-[#0A66C2]"
+                        >
+                           <FaLinkedin />
+                        </motion.a>
+
+                        <motion.a
+                           href="https://www.instagram.com/rambhakar_09/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           whileHover={{ scale: 1.25 }}
+                           className="hover:text-pink-500"
+                        >
+                           <FaInstagram />
+                        </motion.a>
+
+                        <motion.a
+                           href="https://t.me/rambhakar_09"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           whileHover={{ scale: 1.25 }}
+                           className="hover:text-[#229ED9]"
+                        >
+                           <FaTelegramPlane />
+                        </motion.a>
+
+                        <motion.a
+                           href="https://wa.me/918955419560"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           whileHover={{ scale: 1.25 }}
+                           className="hover:text-green-500"
+                        >
+                           <FaWhatsapp />
+                        </motion.a>
+
+                        <motion.a
+                           href="mailto:ramniwasbhakar2008@gmail.com"
+                           whileHover={{ scale: 1.25 }}
+                           className="hover:text-red-500"
+                        >
+                           <FaEnvelope />
+                        </motion.a>
+
                      </div>
                   </div>
 
                </div>
 
-               <div className="mt-12 text-left text-sm opacity-70">
-                  © {new Date().getFullYear()} Ramniwas • Smooth Scroll Portfolio
+               <div className="mt-12 text-sm opacity-70">
+                  © {new Date().getFullYear()} Ramniwas • Portfolio
                </div>
             </motion.div>
 
             {/* Scroll Top */}
             <motion.button
                whileHover={{ scale: 1.2 }}
-               whileTap={{ scale: 0.9 }}
                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                className="fixed right-6 bottom-6 z-50
           bg-blue-500/20 border border-blue-400/40
-          text-blue-400 p-3 rounded-full
-          backdrop-blur-lg hover:bg-blue-500 hover:text-black"
+          text-blue-400 p-3 rounded-full backdrop-blur-lg"
             >
                <FaArrowUp />
             </motion.button>
 
-            {/* Neon Style */}
-            <style jsx>{`
-          .neon {
-            text-shadow: 0 0 12px rgba(59,130,246,0.9);
-          }
-          .neon-hover:hover {
-            text-shadow: 0 0 14px rgba(59,130,246,1);
-          }
-        `}</style>
          </footer>
       </>
    );
