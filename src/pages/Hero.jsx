@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import {
+   FaGithub,
+   FaLinkedinIn,
+   FaInstagram,
+   FaFacebookF,
+   FaTelegramPlane,
+   FaEnvelope,
+} from "react-icons/fa";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -54,9 +61,35 @@ const Hero = () => {
       });
    };
 
+   const socials = [
+      {
+         icon: FaGithub,
+         link: "https://github.com/Rambhakar/",
+      },
+      {
+         icon: FaLinkedinIn,
+         link: "https://www.linkedin.com/in/ramniwas-bhakar-6956a7378/",
+      },
+      {
+         icon: FaInstagram,
+         link: "https://www.instagram.com/rambhakar_09/",
+      },
+      {
+         icon: FaFacebookF,
+         link: "https://www.facebook.com/profile.php?id=100066672422973",
+      },
+      {
+         icon: FaTelegramPlane,
+         link: "https://t.me/rambhakar_09",
+      },
+      {
+         icon: FaEnvelope,
+         link: "mailto:rambhakar09@gmail.com",
+      },
+   ];
+
    return (
-      <section className="relative bg-black text-white overflow-hidden
-                        pt-16 sm:pt-20 lg:pt-24">
+      <section className="relative bg-black text-white overflow-hidden pt-16 sm:pt-20 lg:pt-24">
          <div
             className="
           relative max-w-7xl mx-auto px-6
@@ -68,10 +101,7 @@ const Hero = () => {
             {/* LEFT CONTENT */}
             <div
                ref={textRef}
-               className="
-            flex flex-col justify-center
-            py-6 sm:py-10 lg:py-0
-          "
+               className="flex flex-col justify-center py-6 sm:py-10 lg:py-0"
             >
                <p className="text-gray-400 mb-2">Hi, I am</p>
 
@@ -84,30 +114,36 @@ const Hero = () => {
                </h2>
 
                <p className="text-gray-400 max-w-md leading-relaxed mb-6">
-                  I build scalable web applications using modern frontend and
-                  backend technologies.
+                  I build scalable web applications using modern frontend and backend
+                  technologies.
                </p>
 
-               <div className="flex gap-4">
-                  {[FaGithub, FaLinkedinIn, FaInstagram].map((Icon, i) => (
-                     <button
-                        key={i}
-                        ref={(el) => (iconsRef.current[i] = el)}
-                        onClick={() => rotateIcon(iconsRef.current[i])}
-                        className="p-3 border border-gray-700 rounded-full
-                           hover:bg-white hover:text-black transition"
-                     >
-                        <Icon />
-                     </button>
-                  ))}
+               {/* SOCIAL ICONS */}
+               <div className="flex flex-wrap gap-4">
+                  {socials.map((item, i) => {
+                     const Icon = item.icon;
+                     return (
+                        <a
+                           key={i}
+                           ref={(el) => (iconsRef.current[i] = el)}
+                           href={item.link}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           onMouseEnter={() => rotateIcon(iconsRef.current[i])}
+                           className="p-3 border border-gray-700 rounded-full
+                    hover:bg-white hover:text-black transition"
+                        >
+                           <Icon />
+                        </a>
+                     );
+                  })}
                </div>
             </div>
 
             {/* RIGHT IMAGE */}
             <div
                className="
-            relative
-            w-full flex justify-center
+            relative w-full flex justify-center
             mt-4 sm:mt-6
             lg:absolute lg:right-0 lg:bottom-0
             lg:w-1/2 lg:mt-0
