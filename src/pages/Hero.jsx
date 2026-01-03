@@ -14,7 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
    const textRef = useRef(null);
-   const iconsRef = useRef([]);
    const imageRef = useRef(null);
    const [zoom, setZoom] = useState(false);
 
@@ -35,135 +34,115 @@ const Hero = () => {
       );
    }, []);
 
-   const rotateIcon = (el) => {
-      gsap.fromTo(
-         el,
-         { rotate: 0 },
-         { rotate: 360, duration: 0.6, ease: "power2.out" }
-      );
-   };
-
    const handleImageClick = () => {
       setZoom(true);
-      gsap.fromTo(
-         imageRef.current,
-         { scale: 1 },
-         { scale: 1.3, duration: 0.5, ease: "power3.out" }
-      );
+      gsap.to(imageRef.current, {
+         scale: 1.3,
+         duration: 0.4,
+         ease: "power3.out",
+      });
    };
 
    const closeZoom = () => {
       gsap.to(imageRef.current, {
          scale: 1,
-         duration: 0.4,
-         ease: "power3.out",
+         duration: 0.3,
          onComplete: () => setZoom(false),
       });
    };
 
-   const socials = [
-      {
-         icon: FaGithub,
-         link: "https://github.com/Rambhakar/",
-      },
-      {
-         icon: FaLinkedinIn,
-         link: "https://www.linkedin.com/in/ramniwas-bhakar-6956a7378/",
-      },
-      {
-         icon: FaInstagram,
-         link: "https://www.instagram.com/rambhakar_09/",
-      },
-      {
-         icon: FaFacebookF,
-         link: "https://www.facebook.com/profile.php?id=100066672422973",
-      },
-      {
-         icon: FaTelegramPlane,
-         link: "https://t.me/rambhakar_09",
-      },
-      {
-         icon: FaEnvelope,
-         link: "mailto:rambhakar09@gmail.com",
-      },
-   ];
-
    return (
-      <section className="relative bg-black text-white overflow-hidden pt-16 sm:pt-20 lg:pt-24">
-         <div
-            className="
-          relative max-w-7xl mx-auto px-6
-          grid grid-cols-1 lg:grid-cols-2
-          gap-10 lg:gap-0
-          min-h-auto lg:min-h-[calc(100vh-6rem)]
-        "
-         >
-            {/* LEFT CONTENT */}
-            <div
-               ref={textRef}
-               className="flex flex-col justify-center py-6 sm:py-10 lg:py-0"
-            >
+      <section className="relative bg-black text-white overflow-hidden pt-20">
+         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+            {/* LEFT */}
+            <div ref={textRef} className="flex flex-col justify-center">
                <p className="text-gray-400 mb-2">Hi, I am</p>
 
                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-3">
                   Ramniwas Bhakar
                </h1>
 
-               <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-300 mb-4">
+               <h2 className="text-xl text-gray-300 mb-4">
                   Full Stack Developer
                </h2>
 
-               <p className="text-gray-400 max-w-md leading-relaxed mb-6">
+               <p className="text-gray-400 max-w-md mb-6">
                   I build scalable web applications using modern frontend and backend
                   technologies.
                </p>
 
-               {/* SOCIAL ICONS */}
+               {/* SOCIAL ICONS — PURE HTML LINKS */}
                <div className="flex flex-wrap gap-4">
-                  {socials.map((item, i) => {
-                     const Icon = item.icon;
-                     return (
-                        <a
-                           key={i}
-                           ref={(el) => (iconsRef.current[i] = el)}
-                           href={item.link}
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           onMouseEnter={() => rotateIcon(iconsRef.current[i])}
-                           className="p-3 border border-gray-700 rounded-full
-                    hover:bg-white hover:text-black transition"
-                        >
-                           <Icon />
-                        </a>
-                     );
-                  })}
+
+                  <a
+                     href="https://github.com/Rambhakar/"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="icon-btn text-gray-300"
+                  >
+                     <FaGithub />
+                  </a>
+
+                  <a
+                     href="https://www.linkedin.com/in/ramniwas-bhakar-6956a7378/"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="icon-btn text-[#0A66C2]"
+                  >
+                     <FaLinkedinIn />
+                  </a>
+
+                  <a
+                     href="https://www.instagram.com/rambhakar_09/"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="icon-btn text-pink-500"
+                  >
+                     <FaInstagram />
+                  </a>
+
+                  <a
+                     href="https://www.facebook.com/profile.php?id=100066672422973"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="icon-btn text-[#1877F2]"
+                  >
+                     <FaFacebookF />
+                  </a>
+
+                  <a
+                     href="https://t.me/rambhakar_09"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="icon-btn text-[#229ED9]"
+                  >
+                     <FaTelegramPlane />
+                  </a>
+
+                  <a
+                     href="mailto:ramniwasbhakar2008@gmail.com"
+                     className="icon-btn text-red-500"
+                  >
+                     <FaEnvelope />
+                  </a>
+
                </div>
             </div>
 
             {/* RIGHT IMAGE */}
-            <div
-               className="
-            relative w-full flex justify-center
-            mt-4 sm:mt-6
-            lg:absolute lg:right-0 lg:bottom-0
-            lg:w-1/2 lg:mt-0
-          "
-            >
+            <div className="flex justify-center lg:justify-end">
                <img
                   ref={imageRef}
                   onClick={handleImageClick}
                   src="/images/ram.jpeg"
                   alt="Ramniwas"
-                  className="
-              w-[220px] sm:w-[260px] md:w-[340px] lg:w-[420px]
-              rounded-t-3xl object-cover cursor-pointer
-              shadow-[0_35px_80px_rgba(0,0,0,0.85)]
-              transition
-            "
+                  className="w-[260px] sm:w-[320px] lg:w-[420px]
+            rounded-t-3xl cursor-pointer
+            shadow-[0_35px_80px_rgba(0,0,0,0.85)]"
                />
             </div>
 
-            {/* IMAGE OVERLAY */}
             {zoom && (
                <div
                   onClick={closeZoom}
@@ -171,6 +150,26 @@ const Hero = () => {
                />
             )}
          </div>
+
+         {/* ICON STYLES */}
+         <style>
+            {`
+          .icon-btn {
+            padding: 1rem;
+            border-radius: 9999px;
+            border: 1px solid #374151;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 18px;
+          }
+          .icon-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 20px currentColor;
+          }
+          .icon-btn:active {
+            transform: scale(0.95);
+          }
+        `}
+         </style>
       </section>
    );
 };
