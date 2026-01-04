@@ -157,12 +157,12 @@ const About = () => {
             <FaMapMarkerAlt /> LOCATION
           </h3>
           <p className="text-gray-300">
-            I am from <span className="text-white">India</span>,
-            originally from <span className="text-white">Rajasthan</span>,
-            <span className="text-white"> Churu</span>.
+            I am from <span className="text-sky-400 font-bold">India</span>,
+            originally from <span className="text-purple-500">Rajasthan</span>,
+            <span className="text-orange-400"> Churu </span> .
           </p>
           <p className="text-gray-300">
-            Currently living in <span className="text-white">Jodhpur</span>.
+            Currently living in <span className="text-orange-400">Jodhpur</span>.
           </p>
         </div>
 
@@ -197,16 +197,18 @@ const About = () => {
         {/* RESUME */}
         <div>
           <a
-            href="/Black and Orange Dark Simple and Straightforward Gym Business Meeting Visual Charts Presentation.pdf"
-            download
+            href="/Ramniwas-Bhakar.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3
-    border border-blue-400/40 px-6 py-3 rounded-full text-sm
-    hover:bg-blue-400 hover:text-black transition"
+      border border-blue-400/40 px-6 py-3 rounded-full text-sm
+      hover:bg-blue-400 hover:text-black transition"
           >
             <FaDownload />
-            Download Resume
+            View / Download Resume
           </a>
         </div>
+
 
 
       </div>
