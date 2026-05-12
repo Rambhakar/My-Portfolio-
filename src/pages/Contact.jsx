@@ -1,36 +1,59 @@
 import { useState } from "react";
+
 import { motion } from "framer-motion";
+
 import {
    FaEnvelope,
    FaPhoneAlt,
    FaMapMarkerAlt,
    FaWhatsapp,
+   FaPaperPlane,
+   FaGithub,
+   FaLinkedinIn,
+   FaInstagram,
 } from "react-icons/fa";
 
 const Contact = () => {
    const [loading, setLoading] = useState(false);
+
    const [success, setSuccess] = useState(false);
 
+   const [error, setError] = useState("");
+
+   /* SUBMIT */
    const handleSubmit = async (e) => {
       e.preventDefault();
+
       setLoading(true);
+      setSuccess(false);
+      setError("");
 
       const form = e.target;
+
       const data = new FormData(form);
 
       try {
-         const res = await fetch("https://formspree.io/f/xbjnzjpn", {
-            method: "POST",
-            body: data,
-            headers: { Accept: "application/json" },
-         });
+         /* FORM SUBMIT */
+         const response = await fetch(
+            "https://formspree.io/f/xqabqvnj",
+            {
+               method: "POST",
+               body: data,
+               headers: {
+                  Accept: "application/json",
+               },
+            }
+         );
 
-         if (res.ok) {
+         if (response.ok) {
             setSuccess(true);
+
             form.reset();
+         } else {
+            setError("Message failed to send ❌");
          }
       } catch (err) {
-         console.error(err);
+         setError("Network error ❌");
       } finally {
          setLoading(false);
       }
@@ -39,176 +62,555 @@ const Contact = () => {
    return (
       <section
          id="contact"
-         className="relative w-full py-32 overflow-hidden
-      bg-gradient-to-br from-[#0a0a0a] via-[#0f172a] to-[#020617] text-gray-300"
+         className="
+         relative
+         overflow-hidden
+         bg-[#050505]
+         text-white
+         py-28"
       >
-         {/* Subtle Ambient Glow */}
-         <div className="absolute inset-0 bg-black blur-[140px]" />
 
-         {/* Inner Container (WIDTH FIXED HERE) */}
+         {/* BACKGROUND GLOW */}
+         <div className="absolute inset-0 overflow-hidden">
+
+            <div
+               className="
+               absolute
+               top-[-150px]
+               left-[-150px]
+               w-[400px]
+               h-[400px]
+               rounded-full
+               bg-yellow-500/10
+               blur-[140px]"
+            />
+
+            <div
+               className="
+               absolute
+               bottom-[-150px]
+               right-[-150px]
+               w-[400px]
+               h-[400px]
+               rounded-full
+               bg-orange-500/10
+               blur-[140px]"
+            />
+
+         </div>
+
          <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+            initial={{
+               opacity: 0,
+               y: 80,
+            }}
+
+            whileInView={{
+               opacity: 1,
+               y: 0,
+            }}
+
+            transition={{
+               duration: 1,
+            }}
+
+            viewport={{
+               once: true,
+            }}
+
             className="
-          relative z-10
-          max-w-7xl mx-auto
-          px-6 md:px-10
-        "
+            relative z-10
+            max-w-7xl
+            mx-auto
+            px-6"
          >
-            {/* Heading */}
-            <div className="mb-16 max-w-xl">
-               <h2 className="text-4xl font-bold text-white">
-                  Get in <span className="text-indigo-400">Touch</span>
-               </h2>
-               <p className="mt-4 text-sm text-gray-400 leading-relaxed">
-                  Have a project, idea or collaboration in mind?
-                  Let’s talk and build something meaningful.
-               </p>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            {/* HEADING */}
+            <div className="text-center mb-24">
 
-               {/* Contact Info */}
-               <div className="space-y-6 text-sm">
-
-                  <a
-                     href="mailto:ramniwasbhakar2008@gmail.com"
-                     className="flex items-center gap-4 hover:text-indigo-400 transition"
-                  >
-                     <FaEnvelope className="text-indigo-400" />
-                     <span>ramniwasbhakar2008@gmail.com</span>
-                  </a>
-
-                  <a
-                     href="tel:+918955419560"
-                     className="flex items-center gap-4 hover:text-indigo-400 transition"
-                  >
-                     <FaPhoneAlt className="text-indigo-400" />
-                     <span>+91 8955419560</span>
-                  </a>
-
-                  <a
-                     href="https://wa.me/918955419560"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="flex items-center gap-4 hover:text-green-400 transition"
-                  >
-                     <FaWhatsapp className="text-green-400" />
-                     <span>Chat on WhatsApp</span>
-                  </a>
-
-                  <div className="flex items-center gap-4 opacity-80">
-                     <FaMapMarkerAlt className="text-indigo-400" />
-                     <span>India</span>
-                  </div>
-
-                  <p className="opacity-70 max-w-md pt-4">
-                     Available for freelance, internships & full-time roles.
-                  </p>
+               <div
+                  className="
+                  inline-flex
+                  items-center gap-3
+                  px-6 py-3
+                  rounded-full
+                  border border-yellow-500/20
+                  bg-yellow-500/10
+                  text-yellow-400
+                  text-sm
+                  mb-8"
+               >
+                  ✨ Contact Me
                </div>
 
-               {/* Form */}
-               <form onSubmit={handleSubmit} className="space-y-8">
+               <h2
+                  className="
+                  text-5xl
+                  sm:text-6xl
+                  font-black
+                  leading-tight
+                  mb-8"
+               >
+                  Let’s Build{" "}
 
-                  {/* Name */}
-                  <div className="relative">
-                     <input
-                        required
-                        name="name"
-                        type="text"
+                  <span
+                     className="
+                     bg-gradient-to-r
+                     from-yellow-300
+                     via-yellow-500
+                     to-orange-500
+                     bg-clip-text
+                     text-transparent"
+                  >
+                     Something Amazing
+                  </span>
+               </h2>
+
+               <p
+                  className="
+                  text-gray-400
+                  text-lg
+                  leading-9
+                  max-w-3xl
+                  mx-auto"
+               >
+                  Have a project idea, collaboration or
+                  business inquiry? Send me a message and
+                  I’ll reply as soon as possible 🚀
+               </p>
+
+            </div>
+
+            {/* MAIN GRID */}
+            <div
+               className="
+               grid
+               grid-cols-1
+               lg:grid-cols-2
+               gap-14"
+            >
+
+               {/* LEFT SIDE */}
+               <motion.div
+                  initial={{
+                     opacity: 0,
+                     x: -80,
+                  }}
+
+                  whileInView={{
+                     opacity: 1,
+                     x: 0,
+                  }}
+
+                  transition={{
+                     duration: 1,
+                  }}
+
+                  className="
+                  rounded-[35px]
+                  p-10
+                  bg-white/5
+                  border border-yellow-500/10
+                  backdrop-blur-2xl"
+               >
+
+                  <h3
+                     className="
+                     text-3xl
+                     font-black
+                     mb-10"
+                  >
+                     Contact Information 📞
+                  </h3>
+
+                  <div className="space-y-8">
+
+                     {/* EMAIL */}
+                     <a
+                        href="mailto:ramniwasbhakar2008@gmail.com"
                         className="
-                  peer w-full bg-transparent
-                  border-b border-white/20 py-3
-                  focus:outline-none focus:border-indigo-400
-                "
-                     />
-                     <label
-                        className="
-                  absolute left-0 top-3 text-sm text-gray-400
-                  peer-focus:-top-3 peer-focus:text-xs peer-focus:text-indigo-400
-                  peer-valid:-top-3 peer-valid:text-xs transition-all
-                "
+                        group
+                        flex items-center gap-5
+                        p-5
+                        rounded-2xl
+                        bg-black/30
+                        border border-yellow-500/10
+                        hover:border-yellow-500/30
+                        transition duration-300"
                      >
+
+                        <div
+                           className="
+                           w-14 h-14
+                           rounded-2xl
+                           bg-yellow-500/10
+                           text-yellow-400
+                           flex items-center justify-center
+                           text-xl"
+                        >
+                           <FaEnvelope />
+                        </div>
+
+                        <div>
+                           <p className="text-gray-400 text-sm">
+                              Email
+                           </p>
+
+                           <h4 className="font-bold">
+                              ramniwasbhakar2008@gmail.com
+                           </h4>
+                        </div>
+
+                     </a>
+
+                     {/* PHONE */}
+                     <a
+                        href="tel:+918955419560"
+                        className="
+                        flex items-center gap-5
+                        p-5
+                        rounded-2xl
+                        bg-black/30
+                        border border-yellow-500/10
+                        hover:border-yellow-500/30
+                        transition duration-300"
+                     >
+
+                        <div
+                           className="
+                           w-14 h-14
+                           rounded-2xl
+                           bg-yellow-500/10
+                           text-yellow-400
+                           flex items-center justify-center
+                           text-xl"
+                        >
+                           <FaPhoneAlt />
+                        </div>
+
+                        <div>
+                           <p className="text-gray-400 text-sm">
+                              Phone
+                           </p>
+
+                           <h4 className="font-bold">
+                              +91 8955419560
+                           </h4>
+                        </div>
+
+                     </a>
+
+                     {/* WHATSAPP */}
+                     <a
+                        href="https://wa.me/918955419560"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="
+                        flex items-center gap-5
+                        p-5
+                        rounded-2xl
+                        bg-black/30
+                        border border-yellow-500/10
+                        hover:border-yellow-500/30
+                        transition duration-300"
+                     >
+
+                        <div
+                           className="
+                           w-14 h-14
+                           rounded-2xl
+                           bg-green-500/10
+                           text-green-400
+                           flex items-center justify-center
+                           text-xl"
+                        >
+                           <FaWhatsapp />
+                        </div>
+
+                        <div>
+                           <p className="text-gray-400 text-sm">
+                              WhatsApp
+                           </p>
+
+                           <h4 className="font-bold">
+                              Chat Instantly
+                           </h4>
+                        </div>
+
+                     </a>
+
+                     {/* LOCATION */}
+                     <div
+                        className="
+                        flex items-center gap-5
+                        p-5
+                        rounded-2xl
+                        bg-black/30
+                        border border-yellow-500/10"
+                     >
+
+                        <div
+                           className="
+                           w-14 h-14
+                           rounded-2xl
+                           bg-orange-500/10
+                           text-orange-400
+                           flex items-center justify-center
+                           text-xl"
+                        >
+                           <FaMapMarkerAlt />
+                        </div>
+
+                        <div>
+                           <p className="text-gray-400 text-sm">
+                              Location
+                           </p>
+
+                           <h4 className="font-bold">
+                              Jodhpur, Rajasthan, India
+                           </h4>
+                        </div>
+
+                     </div>
+
+                  </div>
+
+                  {/* SOCIALS */}
+                  <div className="flex gap-5 mt-12">
+
+                     {[
+                        {
+                           icon: <FaGithub />,
+                           link: "https://github.com/Rambhakar/",
+                        },
+
+                        {
+                           icon: <FaLinkedinIn />,
+                           link: "https://linkedin.com",
+                        },
+
+                        {
+                           icon: <FaInstagram />,
+                           link: "https://instagram.com",
+                        },
+                     ].map((item, index) => (
+                        <a
+                           key={index}
+                           href={item.link}
+                           target="_blank"
+                           rel="noreferrer"
+                           className="
+                           w-14 h-14
+                           rounded-2xl
+                           bg-white/5
+                           border border-yellow-500/10
+                           flex items-center justify-center
+                           text-yellow-400
+                           text-xl
+                           hover:scale-110
+                           hover:border-yellow-500/30
+                           transition duration-300"
+                        >
+                           {item.icon}
+                        </a>
+                     ))}
+
+                  </div>
+
+               </motion.div>
+
+               {/* RIGHT FORM */}
+               <motion.form
+                  onSubmit={handleSubmit}
+
+                  initial={{
+                     opacity: 0,
+                     x: 80,
+                  }}
+
+                  whileInView={{
+                     opacity: 1,
+                     x: 0,
+                  }}
+
+                  transition={{
+                     duration: 1,
+                  }}
+
+                  className="
+                  rounded-[35px]
+                  p-10
+                  bg-white/5
+                  border border-yellow-500/10
+                  backdrop-blur-2xl
+                  space-y-8"
+               >
+
+                  <h3
+                     className="
+                     text-3xl
+                     font-black
+                     mb-8"
+                  >
+                     Send Message ✨
+                  </h3>
+
+                  {/* NAME */}
+                  <div>
+
+                     <label className="text-sm text-gray-400">
                         Your Name
                      </label>
+
+                     <input
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="Enter your name"
+                        className="
+                        mt-3
+                        w-full
+                        rounded-2xl
+                        bg-black/30
+                        border border-yellow-500/10
+                        px-5 py-4
+                        outline-none
+                        focus:border-yellow-500/40
+                        transition"
+                     />
+
                   </div>
 
-                  {/* Email */}
-                  <div className="relative">
-                     <input
-                        required
-                        name="email"
-                        type="email"
-                        className="
-                  peer w-full bg-transparent
-                  border-b border-white/20 py-3
-                  focus:outline-none focus:border-indigo-400
-                "
-                     />
-                     <label
-                        className="
-                  absolute left-0 top-3 text-sm text-gray-400
-                  peer-focus:-top-3 peer-focus:text-xs peer-focus:text-indigo-400
-                  peer-valid:-top-3 peer-valid:text-xs transition-all
-                "
-                     >
+                  {/* EMAIL */}
+                  <div>
+
+                     <label className="text-sm text-gray-400">
                         Your Email
                      </label>
+
+                     <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="Enter your email"
+                        className="
+                        mt-3
+                        w-full
+                        rounded-2xl
+                        bg-black/30
+                        border border-yellow-500/10
+                        px-5 py-4
+                        outline-none
+                        focus:border-yellow-500/40
+                        transition"
+                     />
+
                   </div>
 
-                  {/* Message */}
-                  <div className="relative">
-                     <textarea
-                        required
-                        name="message"
-                        rows="4"
-                        className="
-                  peer w-full bg-transparent
-                  border-b border-white/20 py-3
-                  focus:outline-none focus:border-indigo-400
-                  resize-none
-                "
-                     />
-                     <label
-                        className="
-                  absolute left-0 top-3 text-sm text-gray-400
-                  peer-focus:-top-3 peer-focus:text-xs peer-focus:text-indigo-400
-                  peer-valid:-top-3 peer-valid:text-xs transition-all
-                "
-                     >
+                  {/* MESSAGE */}
+                  <div>
+
+                     <label className="text-sm text-gray-400">
                         Your Message
                      </label>
+
+                     <textarea
+                        rows="6"
+                        name="message"
+                        required
+                        placeholder="Write your message..."
+                        className="
+                        mt-3
+                        w-full
+                        rounded-2xl
+                        bg-black/30
+                        border border-yellow-500/10
+                        px-5 py-4
+                        outline-none
+                        resize-none
+                        focus:border-yellow-500/40
+                        transition"
+                     />
+
                   </div>
 
-                  {/* Button */}
+                  {/* BUTTON */}
                   <button
+                     type="submit"
                      disabled={loading}
                      className="
-                inline-flex items-center gap-2
-                border border-indigo-400/40
-                px-8 py-3 rounded-full
-                hover:bg-indigo-400 hover:text-black
-                transition disabled:opacity-50
-              "
+                     w-full
+                     flex items-center justify-center gap-4
+                     py-5
+                     rounded-2xl
+                     bg-gradient-to-r
+                     from-yellow-400
+                     to-orange-500
+                     text-black
+                     font-black
+                     text-lg
+                     hover:scale-[1.02]
+                     transition duration-300
+                     shadow-[0_0_35px_rgba(255,200,0,0.4)]"
                   >
-                     {loading ? "Sending..." : "Send Message"}
+
+                     {loading ? (
+                        "Sending..."
+                     ) : (
+                        <>
+                           Send Message
+                           <FaPaperPlane />
+                        </>
+                     )}
+
                   </button>
 
-                  {/* Success */}
+                  {/* SUCCESS */}
                   {success && (
                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-green-400 text-sm"
+                        initial={{
+                           opacity: 0,
+                        }}
+
+                        animate={{
+                           opacity: 1,
+                        }}
+
+                        className="
+                        text-green-400
+                        text-center
+                        font-semibold"
                      >
-                        Message sent successfully ✔
+                        ✅ Message sent successfully
                      </motion.p>
                   )}
-               </form>
+
+                  {/* ERROR */}
+                  {error && (
+                     <motion.p
+                        initial={{
+                           opacity: 0,
+                        }}
+
+                        animate={{
+                           opacity: 1,
+                        }}
+
+                        className="
+                        text-red-400
+                        text-center
+                        font-semibold"
+                     >
+                        ❌ {error}
+                     </motion.p>
+                  )}
+
+               </motion.form>
+
             </div>
+
          </motion.div>
+
       </section>
    );
 };
